@@ -81,7 +81,7 @@ If we can't find the blog specified in the configuration you'll recieve a Blogpo
 
 ### Displaying Entries
 
-### Single Blog
+#### Single Blog
 
 There are a couple of helpers included to assist you in displaying your post entries in your app. `blog_posts_for` fetches the most recent posts for a particular blog, sorted by published date. Lets have a look at these in practice in `app/views/dashboard/index.html.haml`:
 
@@ -100,7 +100,7 @@ There are a couple of helpers included to assist you in displaying your post ent
 
 Note that you can optionally pass `count` to `blog_posts_for` to only get the n-latest posts. By default this is 3.
 
-### Mutliple Blogs
+#### Mutliple Blogs
 
 If you'd like to render all of the blogs configured in Blogpostify you can call `all_blogs` in your view. Your block will get passed the Blog object and an array of posts.
 
