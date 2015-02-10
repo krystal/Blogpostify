@@ -16,8 +16,8 @@ module Blogpostify
       @blogs ||= []
     end
 
-    def add_blog(title, url, icon=nil, short_name=nil)
-      self.blogs << Blog.new(title, url, short_name, icon)
+    def add_blog(title, url, options={})
+      self.blogs << Blog.new(title, url, options)
     end
   end
 

@@ -1,13 +1,14 @@
 module Blogpostify
   class Blog
 
-    attr_accessor :title, :url, :short_name, :icon 
+    attr_accessor :title, :url, :short_name, :icon, :homepage
 
-    def initialize(title, url, short_name, icon)
+    def initialize(title, url, options={})
       self.title = title
       self.url = url
-      self.short_name = short_name
-      self.icon = icon
+      self.short_name = options[:short_name]
+      self.icon = options[:icon]
+      self.homepage = options[:homepage]
     end
 
     def update_posts
@@ -27,7 +28,11 @@ module Blogpostify
     end
 
     def posts
-      Post.where(:blog => self.short_name).asc
+      Post.where(:blog_id => self.short_name).asc
+    end
+
+    def populated?
+      posts.exists?
     end
 
     def short_name

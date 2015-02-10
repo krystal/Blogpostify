@@ -1,11 +1,9 @@
 module Blogpostify
   class Engine < ::Rails::Engine
     
-    initializer 'blogpostify.initialize' do |app|
-      config.paths["db/migrate"].expanded.each do |expanded_path|
-        app.config.paths["db/migrate"] << expanded_path
-      end
+    engine_name 'blogpostify'
 
+    initializer 'blogpostify.initialize' do |app|
       ActiveSupport.on_load :action_controller do
         helper Blogpostify::ViewHelpers
       end

@@ -1,25 +1,30 @@
 module Blogpostify
   module ViewHelpers
 
-    def blog_populated?(blog_name)
+    def blog_posts_for(blog_name, options={}, &block)
       blog = Blogpostify.find_blog!(blog_name)
-      blog.posts.exists?
+
+      if block_given?
+        yield blog, get_posts(blog, options)
+        return nil # Block should do all of the rendering
+      end
     end
 
-    def blog_posts_for(blog_name, options={}, &block)
+    def all_blogs(options={}, &block)
+      Blogpostify.blogs.each do |blog|
+        yield blog, get_posts(blog, options) if block_given?
+      end
+      return nil
+    end
+
+    private
+
+    def get_posts(blog, options={})
       options.reverse_merge!({
         :count => 3
       })
 
-      blog = Blogpostify.find_blog!(blog_name)
-      posts_scope = blog.posts.asc.limit(options[:count])
-
-      if block_given?
-        posts_scope.each {|post| yield post }
-        return nil # Block should do all of the rendering
-      else
-        posts_scope.to_a
-      end
+      blog.posts.asc.limit(options[:count]).to_a
     end
 
   end
