@@ -37,8 +37,8 @@ The title of your blog will be parameterized to form an blog identifier for your
 
 ```ruby
 Blogpostify.configure do |config|
-    config.add_blog("Riding Rails", "http://weblog.rubyonrails.org/feed/atom.xml")
-    config.add_blog("Signal v. Noise", "https://signalvnoise.com/posts.rss", "svn", "https://basecamp.com/assets/general/basecamp.png")
+  config.add_blog("Riding Rails", "http://weblog.rubyonrails.org/feed/atom.xml")
+  config.add_blog("Signal v. Noise", "https://signalvnoise.com/posts.rss", "svn", "https://basecamp.com/assets/general/basecamp.png")
 end
 ```
 
