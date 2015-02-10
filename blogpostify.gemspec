@@ -8,9 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Blogpostify::VERSION
   spec.authors       = ["Dan Wentworth"]
   spec.email         = ["dan@atechmedia.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.summary       = %q{Fetch, cache and display blog posts in your Rails app.}
+  spec.homepage      = "http://darkphnx.com"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
@@ -20,4 +19,5 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_dependency "rails", "~> 4"
 end

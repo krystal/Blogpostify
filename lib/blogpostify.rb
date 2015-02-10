@@ -4,15 +4,59 @@ require 'rss'
 require "blogpostify/version"
 require "blogpostify/blog"
 require "blogpostify/post"
+require "blogpostify/view_helpers"
+require 'blogpostify/engine'
 
 module Blogpostify
 
-  attr_reader :blogs
-  attr_accessor :max_description_length
+  class BlogNotFoundError < StandardError; end
 
-  # Maximum length a description can be in characters
-  def max_description_length
-    @max_description_length || 200
+  class Configuration
+    def blogs
+      @blogs ||= []
+    end
+
+    def add_blog(title, url, icon=nil, short_name=nil)
+      self.blogs << Blog.new(title, url, short_name, icon)
+    end
+  end
+
+  class << self
+    attr_accessor :configuration
+
+    def configure
+      self.configuration ||= Configuration.new
+      yield configuration
+    end
+
+    def find_blog!(blog_short_name)
+      blog_short_name = blog_short_name.to_s
+
+      found_blog = blogs.find do |blog|
+        blog.short_name == blog_short_name
+      end
+
+      if found_blog.nil?
+        raise BlogNotFoundError, "Blog #{blog_short_name} is not configured. Check Blogpostify#blogs." 
+      else
+        found_blog
+      end
+    end
+
+    def blogs
+      configuration.blogs
+    end
+
+    def update_blogs
+      blogs.flat_map do |blog|
+        blog.update_posts
+      end
+    end
+
+    def update_blog(blog_name)
+      find_blog!(blog_name).update_posts
+    end
+
   end
 
 end
