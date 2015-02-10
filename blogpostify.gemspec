@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Dan Wentworth"]
   spec.email         = ["dan@atechmedia.com"]
   spec.summary       = %q{Fetch, cache and display blog posts in your Rails app.}
-  spec.homepage      = "http://darkphnx.com"
+  spec.homepage      = "https://github.com/darkphnx/Blogpostify"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
