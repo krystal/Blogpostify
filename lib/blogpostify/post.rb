@@ -3,7 +3,7 @@ module Blogpostify
 
     self.table_name = 'blogpostify_posts'
 
-    scope :asc, -> { order(published_at: :desc) }
+    scope :asc, -> { order("published_at DESC") }
 
     validates :guid, :uniqueness => { :scope => :blog_id }
 
